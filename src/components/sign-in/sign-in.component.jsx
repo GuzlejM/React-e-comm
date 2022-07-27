@@ -1,61 +1,74 @@
-import React from "react";
+import { useState } from "react";
+import axios from "axios";
+import GoogleLogin from "react-google-login";
 
 import FormInput from "../form-input/form-input.component";
 import CustomButton from "../custom-button/custom-button.component";
 
 import "./sign-in.styles.scss";
 
-class SignIn extends React.Component {
-  constructor(props) {
-    super(props);
+const defaultFormValues = {
+  email: "",
+  password: "",
+};
 
-    this.state = {
-      email: "",
-      password: "",
-    };
-  }
+const SignIn = () => {
+  const [formFields, setFormFields] = useState(defaultFormValues);
+  const { email, password } = formFields;
 
-  handleSubmit = (event) => {
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+
+    setFormFields({ ...formFields, [name]: value });
+  };
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
-    this.setState({ email: "", password: "" });
+    try {
+      await resetFormFields();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  handleChange = (event) => {
-    const { value, name } = event.target;
-
-    this.setState({ [name]: value });
+  const resetFormFields = () => {
+    setFormFields(defaultFormValues);
   };
 
-  render() {
-    return (
-      <div className="sign-in">
-        <h2>I already have an account</h2>
-        <span>Sign in with your email and password</span>
+  return (
+    <div className="sign-in">
+      <h2>I already have an account</h2>
+      <span>Sign in with your email and password</span>
 
-        <form onSubmit={this.handleSubmit}>
-          <FormInput
-            name="email"
-            handleChange={this.handleChange}
-            type="email"
-            value={this.state.email}
-            label="email"
-            required
-          />
-          <FormInput
-            name="password"
-            type="password"
-            value={this.state.password}
-            handleChange={this.handleChange}
-            label="password"
-            required
-          />
+      <form onSubmit={handleSubmit}>
+        <FormInput
+          name="email"
+          handleChange={handleChange}
+          type="email"
+          value={email}
+          label="email"
+          required
+        />
+        <FormInput
+          name="password"
+          type="password"
+          value={password}
+          handleChange={handleChange}
+          label="password"
+          required
+        />
 
-          <CustomButton type="submit">Sign in</CustomButton>
-        </form>
-      </div>
-    );
-  }
-}
+        <CustomButton type="submit">Sign in</CustomButton>
+        <GoogleLogin
+          clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
+          buttonText="Log in with Google"
+          onSuccess={handleSubmit}
+          cookiePolicy={"single_host_origin"}
+        ></GoogleLogin>
+      </form>
+    </div>
+  );
+};
 
 export default SignIn;

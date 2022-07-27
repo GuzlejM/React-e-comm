@@ -28,13 +28,15 @@ const SignUp = () => {
 
     try {
       const url = "http://localhost:5000/api/auth/register";
-      const data = await axios.post(url, formFields);
-      console.log(data);
+      if (formFields.password !== formFields.confirmPassword) {
+        alert("Password and Confirm Password must be the same.");
+      } else {
+        const data = await axios.post(url, formFields);
+        await resetFormFields();
+      }
     } catch (error) {
       console.log(error);
     }
-
-    await resetFormFields();
   };
 
   const resetFormFields = () => {
@@ -43,8 +45,8 @@ const SignUp = () => {
 
   return (
     <div className="sign-in">
-      <h2>I already have an account</h2>
-      <span>Sign in with your email and password</span>
+      <h2>Don't have an account ?</h2>
+      <span>Sign up with Registration Form down below.</span>
 
       <form onSubmit={handleSubmit}>
         <FormInput

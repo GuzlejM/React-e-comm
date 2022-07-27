@@ -36,7 +36,10 @@ const SignIn = () => {
       const data = await axios.post(url, formFields);
       console.log(data);
     } catch (error) {
-      console.log(error);
+      const data = error.response.data;
+      !data.error
+        ? alert(`${data.message}`)
+        : alert(`${data.message}: ${data.error}`);
     }
 
     await resetFormFields();

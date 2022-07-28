@@ -1,10 +1,11 @@
 import axios from "axios";
 import GoogleLogin from "react-google-login";
-import { useState } from "react";
+import { useState, useContext } from "react";
 
 import FormInput from "../form-input/form-input.component";
 import CustomButton from "../custom-button/custom-button.component";
 
+import { UserContext } from "../../contexts/user.context";
 import "./sign-in.styles.scss";
 
 const defaultFormValues = {
@@ -15,6 +16,8 @@ const defaultFormValues = {
 const SignIn = () => {
   const [formFields, setFormFields] = useState(defaultFormValues);
   const { email, password } = formFields;
+
+  const { setCurrentUser } = useContext(UserContext);
 
   const [loginData, setLoginData] = useState(
     localStorage.getItem("loginData")
@@ -34,15 +37,17 @@ const SignIn = () => {
     try {
       const url = "http://localhost:5000/api/auth/login";
       const data = await axios.post(url, formFields);
-      console.log(data);
+      const user = data.data.user;
+
+      setCurrentUser(user);
+
+      await resetFormFields();
     } catch (error) {
       const data = error.response.data;
       !data.error
         ? alert(`${data.message}`)
         : alert(`${data.message}: ${data.error}`);
     }
-
-    await resetFormFields();
   };
 
   const handleLoginGoogle = async (googleData) => {

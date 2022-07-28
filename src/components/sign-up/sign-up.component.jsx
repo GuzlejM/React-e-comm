@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import axios from "axios";
 
 import FormInput from "../form-input/form-input.component";
 import CustomButton from "../custom-button/custom-button.component";
+
+import { UserContext } from "../../contexts/user.context";
 
 import "./sign-up.styles.scss";
 
@@ -16,6 +18,10 @@ const defaultFormValues = {
 const SignUp = () => {
   const [formFields, setFormFields] = useState(defaultFormValues);
   const { username, email, password, confirmPassword } = formFields;
+
+  const { setCurrentUser } = useContext(UserContext);
+
+  console.log("hit");
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -32,6 +38,9 @@ const SignUp = () => {
         alert("Password and Confirm Password must be the same.");
       } else {
         const data = await axios.post(url, formFields);
+        const user = data.data.user;
+
+        setCurrentUser(user);
         await resetFormFields();
       }
     } catch (error) {

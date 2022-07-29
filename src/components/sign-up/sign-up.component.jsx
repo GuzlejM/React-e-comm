@@ -21,8 +21,6 @@ const SignUp = () => {
 
   const { setCurrentUser } = useContext(UserContext);
 
-  console.log("hit");
-
   const handleChange = (event) => {
     const { name, value } = event.target;
 
@@ -37,10 +35,7 @@ const SignUp = () => {
       if (formFields.password !== formFields.confirmPassword) {
         alert("Password and Confirm Password must be the same.");
       } else {
-        const data = await axios.post(url, formFields);
-        const user = data.data.user;
-
-        setCurrentUser(user);
+        await axios.post(url, formFields);
         await resetFormFields();
       }
     } catch (error) {

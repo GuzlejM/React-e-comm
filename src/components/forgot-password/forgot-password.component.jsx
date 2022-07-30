@@ -1,16 +1,16 @@
 import axios from "axios";
-import { useState } from "react";
+import React, { useState } from "react";
 
 import FormInput from "../form-input/form-input.component";
 import CustomButton from "../custom-button/custom-button.component";
 
-import "./sign-in.styles.scss";
+import "./forgot-password.styles.scss";
 
 const defaultFormValues = {
   email: "",
 };
 
-const SignIn = () => {
+const ForgotPassword = () => {
   const [formFields, setFormFields] = useState(defaultFormValues);
   const { email } = formFields;
 
@@ -22,33 +22,22 @@ const SignIn = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log("NASRAC!!!");
+
+    try {
+      const url = "http://localhost:5000/api/auth/reset_password";
+      await axios.post(url, formFields);
+      await resetFormFields();
+    } catch (error) {
+      console.log(error);
+    }
   };
-  // const handleSubmit = async (event) => {
-  //   event.preventDefault();
 
-  //   try {
-  //     const url = "http://localhost:5000/api/auth/login";
-  //     const data = await axios.post(url, formFields);
-  //     const user = data.data.user;
-
-  //     setCurrentUser(user);
-
-  //     await resetFormFields();
-  //   } catch (error) {
-  //     const data = error.response.data;
-  //     !data.error
-  //       ? alert(`${data.message}`)
-  //       : alert(`${data.message}: ${data.error}`);
-  //   }
-  // };
-
-  // const resetFormFields = () => {
-  //   setFormFields(defaultFormValues);
-  // };
+  const resetFormFields = () => {
+    setFormFields(defaultFormValues);
+  };
 
   return (
-    <div className="sign-in">
+    <div className="paswordForm">
       <h2>Forgot the password ?</h2>
       <span>Type in your email and submit Reset Password</span>
 
@@ -70,4 +59,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default ForgotPassword;

@@ -1,5 +1,6 @@
 import axios from "axios";
 import GoogleLogin from "react-google-login";
+import { Link } from "react-router-dom";
 import { useState, useContext } from "react";
 
 import FormInput from "../form-input/form-input.component";
@@ -97,6 +98,9 @@ const SignIn = () => {
           label="password"
           required
         />
+        <Link className="option" to="/forgot_password">
+          forgot password ?
+        </Link>
 
         <div className="buttons-container">
           <CustomButton type="submit">Sign in</CustomButton>

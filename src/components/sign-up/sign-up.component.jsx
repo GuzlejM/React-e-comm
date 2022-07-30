@@ -35,7 +35,9 @@ const SignUp = () => {
       if (formFields.password !== formFields.confirmPassword) {
         alert("Password and Confirm Password must be the same.");
       } else {
-        await axios.post(url, formFields);
+        const data = await axios.post(url, formFields);
+        const user = data.data.user;
+        setCurrentUser(user);
         await resetFormFields();
       }
     } catch (error) {

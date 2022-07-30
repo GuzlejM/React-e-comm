@@ -4,6 +4,7 @@
   display: flex;
   justify-content: space-between;
   margin-bottom: 25px;
+  min-width: 500px;
 
   .logo-container {
     height: 100%;
@@ -20,6 +21,7 @@
 
     .option {
       padding: 10px 15px;
+      min-width: 57px;
     }
   }
 }

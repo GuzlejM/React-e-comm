@@ -36,7 +36,11 @@ const SignUp = () => {
         alert("Password and Confirm Password must be the same.");
       } else {
         const data = await axios.post(url, formFields);
-        const user = data.data.user;
+        const { auth, user } = data.data;
+        if (auth) {
+          await window.localStorage.setItem("user", user);
+          await window.localStorage.setItem("token", auth);
+        }
         setCurrentUser(user);
         await resetFormFields();
       }

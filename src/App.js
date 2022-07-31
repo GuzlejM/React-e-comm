@@ -21,7 +21,6 @@ function App() {
         <Route exact path="/signin" element={<SignInAndSignUp />} />
         <Route exact path="/verify/:id/:token" element={<VerifyPage />} />
         <Route exact path="/forgot_password" element={<ForgotPasswordPage />} />
-        >
         <Route
           exact
           path="/reset_password/:id/:token"

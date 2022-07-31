@@ -15,6 +15,7 @@ const Header = () => {
     const url = "http://localhost:5000/logout";
     await axios.get(url);
     await setCurrentUser(null);
+    await window.localStorage.removeItem("isLoggedIn", true);
   };
 
   return (

@@ -1,7 +1,8 @@
+import { useState, useContext } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import GoogleLogin from "react-google-login";
-import { Link } from "react-router-dom";
-import { useState, useContext } from "react";
+import { useCookies } from "react-cookie";
 
 import FormInput from "../form-input/form-input.component";
 import CustomButton from "../custom-button/custom-button.component";
@@ -17,6 +18,8 @@ const defaultFormValues = {
 const SignIn = () => {
   const [formFields, setFormFields] = useState(defaultFormValues);
   const { email, password } = formFields;
+
+  const [cookies, setCookie] = useCookies(["user"]);
 
   const { setCurrentUser } = useContext(UserContext);
 
@@ -37,11 +40,15 @@ const SignIn = () => {
 
     try {
       const url = "http://localhost:5000/api/auth/login";
-      const data = await axios.post(url, formFields);
-      const user = data.data.user;
-
+      const data = await axios.post(url, formFields, {
+        credentials: "include",
+      });
+      const { user } = data.data;
+      console.log(data);
+      await setCookie("user", "gowtham", {
+        path: "/",
+      });
       setCurrentUser(user);
-
       await resetFormFields();
     } catch (error) {
       const data = error.response.data;

@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
@@ -10,6 +11,8 @@ import NewPasswordPage from "./pages/new-password-page/new-password-page.compone
 import ShopPage from "./pages/shop/shop.component";
 import SignInAndSignUp from "./pages/sign-in-and-sign-up/sign-in-and-sign-up.component";
 import VerifyPage from "./pages/verify/verify.component";
+
+axios.defaults.withCredentials = true;
 
 function App() {
   return (

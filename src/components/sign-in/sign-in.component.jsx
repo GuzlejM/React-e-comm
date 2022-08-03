@@ -41,13 +41,13 @@ const SignIn = () => {
     try {
       const url = "http://localhost:5000/api/auth/login";
       const data = await axios.post(url, formFields, {
-        credentials: "include",
+        withCredentials: true,
       });
+
       const { user } = data.data;
-      console.log(data);
-      await setCookie("user", "gowtham", {
-        path: "/",
-      });
+      // await setCookie("user", "gowtham", {
+      //   path: "/",
+      // });
       setCurrentUser(user);
       await resetFormFields();
     } catch (error) {

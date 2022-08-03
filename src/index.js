@@ -2,22 +2,21 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { CookiesProvider } from "react-cookie";
 import { BrowserRouter } from "react-router-dom";
-import axios from "axios";
-
 import App from "./App";
+import { AuthProvider } from "./contexts/auth.context";
 import { UserProvider } from "./contexts/user.context";
 
 import "./index.css";
 
-// axios.defaults.withCredentials = true;
-
 ReactDOM.render(
   <BrowserRouter>
-    <UserProvider>
-      <CookiesProvider>
-        <App />
-      </CookiesProvider>
-    </UserProvider>
+    <AuthProvider>
+      <UserProvider>
+        <CookiesProvider>
+          <App />
+        </CookiesProvider>
+      </UserProvider>
+    </AuthProvider>
   </BrowserRouter>,
   document.getElementById("root")
 );

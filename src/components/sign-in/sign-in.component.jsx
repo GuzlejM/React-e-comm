@@ -100,12 +100,15 @@ const SignIn = () => {
           label="password"
           required
         />
-        <Link className="option" to="/forgot_password">
-          forgot password ?
-        </Link>
 
         <div className="buttons-container">
-          <CustomButton type="submit">Sign in</CustomButton>
+          <div className="column-sign-in">
+            <CustomButton type="submit">Sign in</CustomButton>
+
+            <Link className="option" to="/forgot_password">
+              forgot password ?
+            </Link>
+          </div>
 
           <div>
             {loginData ? (

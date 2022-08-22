@@ -8,9 +8,10 @@ export const AuthProvider = ({ children }) => {
   const value = { isLoggedIn, setIsLoggedIn };
 
   async function getLoggedIn() {
-    const isLoggedIn = await axios.get(
+    let isLoggedIn = await axios.get(
       "http://localhost:5000/api/auth/is_logged_in"
     );
+    console.log(isLoggedIn.data, "real data");
     setIsLoggedIn(isLoggedIn.data);
   }
 

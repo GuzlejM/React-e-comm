@@ -7,6 +7,7 @@ import { useCookies } from "react-cookie";
 import FormInput from "../form-input/form-input.component";
 import CustomButton from "../custom-button/custom-button.component";
 
+import { AuthContext } from "../../contexts/auth.context";
 import { UserContext } from "../../contexts/user.context";
 import "./sign-in.styles.scss";
 
@@ -14,6 +15,7 @@ const defaultFormValues = {
   email: "",
   password: "",
 };
+/* SIGN IN FUNCTION */
 
 const SignIn = () => {
   const [formFields, setFormFields] = useState(defaultFormValues);
@@ -21,6 +23,7 @@ const SignIn = () => {
 
   const [cookies, setCookie] = useCookies(["user"]);
 
+  const { setIsLoggedIn } = useContext(AuthContext);
   const { setCurrentUser } = useContext(UserContext);
 
   const [loginData, setLoginData] = useState(
@@ -35,6 +38,29 @@ const SignIn = () => {
     setFormFields({ ...formFields, [name]: value });
   };
 
+  // HANDLE LOGIN
+
+  const getLoggedIn = async (event) => {
+    let isLoggedIn = await axios.get(
+      "http://localhost:5000/api/auth/is_logged_in"
+    );
+    setIsLoggedIn(isLoggedIn.data);
+  };
+
+  // IN CASE OF NEED
+  // async function getLoggedIn() {
+  //   const isLoggedIn = await axios.get(
+  //     "http://localhost:5000/api/auth/is_logged_in"
+  //   );
+  //   console.log(isLoggedIn.data, "real data");
+  //   setIsLoggedIn(isLoggedIn.data);
+  // }
+
+  // useEffect(() => {
+  //   getLoggedIn();
+  //   console.log(localStorage);
+  // }, []);
+
   const handleLogin = async (event) => {
     event.preventDefault();
 
@@ -43,13 +69,9 @@ const SignIn = () => {
       const data = await axios.post(url, formFields, {
         withCredentials: true,
       });
-
-      const { user } = data.data;
-      // await setCookie("user", "gowtham", {
-      //   path: "/",
-      // });
-      setCurrentUser(user);
+      console.log(data);
       await resetFormFields();
+      await getLoggedIn();
     } catch (error) {
       const data = error.response.data;
       !data.error

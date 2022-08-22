@@ -4,7 +4,7 @@ import "./custom-button.styles.scss";
 
 const CustomButton = ({ children, ...restProps }) => (
   <button className="custom-button" {...restProps}>
-    {children}
+    <span>{children}</span>
   </button>
 );
 

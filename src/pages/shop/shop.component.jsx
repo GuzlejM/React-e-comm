@@ -1,28 +1,28 @@
-import React from "react";
+import { useContext } from "react";
 
-import SHOP_DATA from "./shop.data";
+import ProductCard from "../../components/product-card/product-card.component";
 
-import CollectionPreview from "../../components/collection-preview/collection-preview.component";
+import { ProductsContext } from "../../contexts/products.context";
 
-class ShopPage extends React.Component {
-  constructor(props) {
-    super(props);
+import "./shop.styles.scss";
 
-    this.state = {
-      collections: SHOP_DATA,
-    };
-  }
+const ShopPage = () => {
+  const { products } = useContext(ProductsContext);
+  console.log(products);
 
-  render() {
-    const { collections } = this.state;
-    return (
-      <div className="shop-page">
-        {collections.map(({ id, ...restProps }) => (
-          <CollectionPreview key={id} {...restProps} />
-        ))}
-      </div>
-    );
-  }
-}
+  return (
+    <div className="category-container">
+      {products.map((category, index) => {
+        return (
+          <div className="product-container" key={index}>
+            {category.items.map((item) => {
+              return <ProductCard key={item.id} product={item} />;
+            })}
+          </div>
+        );
+      })}
+    </div>
+  );
+};
 
 export default ShopPage;

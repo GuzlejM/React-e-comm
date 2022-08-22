@@ -5,6 +5,7 @@ import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import { AuthProvider } from "./contexts/auth.context";
 import { UserProvider } from "./contexts/user.context";
+import { ProductsProvider } from "./contexts/products.context";
 
 import "./index.css";
 
@@ -12,9 +13,11 @@ ReactDOM.render(
   <BrowserRouter>
     <AuthProvider>
       <UserProvider>
-        <CookiesProvider>
-          <App />
-        </CookiesProvider>
+        <ProductsProvider>
+          <CookiesProvider>
+            <App />
+          </CookiesProvider>
+        </ProductsProvider>
       </UserProvider>
     </AuthProvider>
   </BrowserRouter>,

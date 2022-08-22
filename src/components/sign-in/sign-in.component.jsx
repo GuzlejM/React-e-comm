@@ -2,13 +2,11 @@ import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import GoogleLogin from "react-google-login";
-import { useCookies } from "react-cookie";
 
 import FormInput from "../form-input/form-input.component";
 import CustomButton from "../custom-button/custom-button.component";
 
 import { AuthContext } from "../../contexts/auth.context";
-import { UserContext } from "../../contexts/user.context";
 import "./sign-in.styles.scss";
 
 const defaultFormValues = {
@@ -21,10 +19,7 @@ const SignIn = () => {
   const [formFields, setFormFields] = useState(defaultFormValues);
   const { email, password } = formFields;
 
-  const [cookies, setCookie] = useCookies(["user"]);
-
   const { setIsLoggedIn } = useContext(AuthContext);
-  const { setCurrentUser } = useContext(UserContext);
 
   const [loginData, setLoginData] = useState(
     localStorage.getItem("loginData")
@@ -40,27 +35,6 @@ const SignIn = () => {
 
   // HANDLE LOGIN
 
-  const getLoggedIn = async (event) => {
-    let isLoggedIn = await axios.get(
-      "http://localhost:5000/api/auth/is_logged_in"
-    );
-    setIsLoggedIn(isLoggedIn.data);
-  };
-
-  // IN CASE OF NEED
-  // async function getLoggedIn() {
-  //   const isLoggedIn = await axios.get(
-  //     "http://localhost:5000/api/auth/is_logged_in"
-  //   );
-  //   console.log(isLoggedIn.data, "real data");
-  //   setIsLoggedIn(isLoggedIn.data);
-  // }
-
-  // useEffect(() => {
-  //   getLoggedIn();
-  //   console.log(localStorage);
-  // }, []);
-
   const handleLogin = async (event) => {
     event.preventDefault();
 
@@ -71,7 +45,7 @@ const SignIn = () => {
       });
       console.log(data);
       await resetFormFields();
-      await getLoggedIn();
+      await setIsLoggedIn(true);
     } catch (error) {
       const data = error.response.data;
       !data.error

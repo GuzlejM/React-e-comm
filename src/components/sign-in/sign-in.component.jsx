@@ -1,5 +1,5 @@
 import { useState, useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import GoogleLogin from "react-google-login";
 
@@ -13,13 +13,13 @@ const defaultFormValues = {
   email: "",
   password: "",
 };
-/* SIGN IN FUNCTION */
 
+/* SIGN IN FUNCTION */
 const SignIn = () => {
   const [formFields, setFormFields] = useState(defaultFormValues);
   const { email, password } = formFields;
-
   const { setIsLoggedIn } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const [loginData, setLoginData] = useState(
     localStorage.getItem("loginData")
@@ -34,7 +34,6 @@ const SignIn = () => {
   };
 
   // HANDLE LOGIN
-
   const handleLogin = async (event) => {
     event.preventDefault();
 
@@ -43,9 +42,9 @@ const SignIn = () => {
       const data = await axios.post(url, formFields, {
         withCredentials: true,
       });
-      console.log(data);
       await resetFormFields();
       await setIsLoggedIn(true);
+      await navigate("/");
     } catch (error) {
       const data = error.response.data;
       !data.error

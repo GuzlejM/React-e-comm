@@ -27,34 +27,36 @@ const Header = () => {
       <Link to="/" className="logo-container">
         <Logo className="logo" />
       </Link>
-      {isLoggedIn === true && (
-        <div className="options">
-          <Link className="option" to="/shop">
-            SHOP
-          </Link>
-          <Link className="option" to="/shop">
-            CONTACT
-          </Link>
-          <Link className="option" to="/signin" onClick={signOutHandler}>
-            SIGN OUT
-          </Link>
-        </div>
-      )}
-      {isLoggedIn === false && (
-        <div className="options">
-          <Link className="option" to="/shop">
-            SHOP
-          </Link>
-          <Link className="option" to="/shop">
-            CONTACT
-          </Link>
-          <Link className="option" to="/signin">
-            SIGN IN
-          </Link>
-        </div>
-      )}
-      <CartIcon />
-      {isCartOpen && <CartDropdown />}
+      <div className="header-right-side">
+        {isLoggedIn === true && (
+          <div className="options">
+            <Link className="option" to="/shop">
+              SHOP
+            </Link>
+            <Link className="option" to="/shop">
+              CONTACT
+            </Link>
+            <Link className="option" to="/signin" onClick={signOutHandler}>
+              SIGN OUT
+            </Link>
+          </div>
+        )}
+        {isLoggedIn === false && (
+          <div className="options">
+            <Link className="option" to="/shop">
+              SHOP
+            </Link>
+            <Link className="option" to="/shop">
+              CONTACT
+            </Link>
+            <Link className="option" to="/signin">
+              SIGN IN
+            </Link>
+          </div>
+        )}
+        <CartIcon />
+        {isCartOpen && <CartDropdown />}
+      </div>
     </div>
   );
 };

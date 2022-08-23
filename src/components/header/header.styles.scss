@@ -22,10 +22,18 @@
     .option {
       padding: 10px 15px;
       min-width: 57px;
+      width: 100px;
+      margin-right: 20px;
     }
 
     .option:last-child {
-      width: 80px;
+      width: 150px;
     }
   }
+}
+
+.header-right-side {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }

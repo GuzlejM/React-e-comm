@@ -11,14 +11,27 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 1em;
-  // The normal background color is set to yellow
+
+  @include devices(tabletWide) {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1em;
+  }
+
+  @include devices(desktop) {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1em;
+  }
 
   @include devices(tablet) {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1em;
   }
 
   @include devices(mobile) {
     display: flex;
     flex-direction: column;
-    align-items: center;
   }
 }

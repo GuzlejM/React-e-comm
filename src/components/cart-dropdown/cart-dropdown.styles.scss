@@ -16,11 +16,28 @@
     margin: 50px auto;
   }
 
+  .cart-items-empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+
+  .cart-dropdown {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
+  }
+
   .cart-items {
-    height: 240px;
     display: flex;
     flex-direction: column;
     overflow: scroll;
+  }
+  .cart-items::-webkit-scrollbar {
+    width: 0px;
+    background: transparent; /* make scrollbar transparent */
   }
 
   button {

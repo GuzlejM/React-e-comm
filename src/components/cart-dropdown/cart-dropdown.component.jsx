@@ -33,6 +33,9 @@ const CartDropdown = () => {
     };
   });
 
+  // TODO
+  // https://stackoverflow.com/questions/55508836/prevent-page-scrolling-when-mouse-is-over-one-particular-div
+
   return (
     <div ref={menuRef} className="cart-dropdown-container">
       {cartItems.length === 0 ? (

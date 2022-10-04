@@ -1,11 +1,24 @@
-.product-container {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1em;
-}
+@use "../../../style.scss" as devices;
+@import "../../../style.scss";
 
 .category-container {
   width: 100%;
   display: flex;
   flex-direction: column;
+}
+
+.responsive-product-container {
+  // The normal background color is set to yellow
+
+  @include devices(tablet) {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1em;
+  }
+
+  @include devices(mobile) {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1em;
+  }
 }

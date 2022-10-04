@@ -14,10 +14,14 @@ const ShopPage = () => {
     <div className="category-container">
       {products.map((category, index) => {
         return (
-          <div className="product-container" key={index}>
-            {category.items.map((item) => {
-              return <ProductCard key={item.id} product={item} />;
-            })}
+          <div>
+            <h2>{category.title}</h2>
+
+            <div className="responsive-product-container" key={index}>
+              {category.items.map((item) => {
+                return <ProductCard key={item.id} product={item} />;
+              })}
+            </div>
           </div>
         );
       })}

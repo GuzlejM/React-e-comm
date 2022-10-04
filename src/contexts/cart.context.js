@@ -56,6 +56,12 @@ export const CartProvider = ({ children }) => {
   const [cartTotal, setCartTotal] = useState(0);
 
   useEffect(() => {
+    if (setIsCartOpen(false)) {
+      document.body.style.overflow = "hidden";
+    }
+  }, [setIsCartOpen]);
+
+  useEffect(() => {
     const newCartCount = cartItems.reduce(
       (total, cartItem) => total + cartItem.quantity,
       0

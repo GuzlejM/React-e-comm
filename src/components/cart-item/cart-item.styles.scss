@@ -19,5 +19,25 @@
     .name {
       font-size: 16px;
     }
+
+    .items-buttons {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    .cart-dropdown-quantity {
+      display: flex;
+      width: 30px;
+      justify-content: space-between;
+
+      .arrow {
+        cursor: pointer;
+      }
+    }
+
+    .remove-button {
+      cursor: pointer;
+    }
   }
 }

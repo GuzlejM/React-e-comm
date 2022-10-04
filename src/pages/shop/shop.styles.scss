@@ -7,18 +7,18 @@
   flex-direction: column;
 }
 
-.responsive-product-container {
+.responsive {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1em;
   // The normal background color is set to yellow
 
   @include devices(tablet) {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1em;
   }
 
   @include devices(mobile) {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 }

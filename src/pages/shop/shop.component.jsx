@@ -17,7 +17,7 @@ const ShopPage = () => {
           <div>
             <h2>{category.title}</h2>
 
-            <div className="responsive-product-container" key={index}>
+            <div className="responsive" key={index}>
               {category.items.map((item) => {
                 return <ProductCard key={item.id} product={item} />;
               })}

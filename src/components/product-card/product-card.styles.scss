@@ -1,3 +1,6 @@
+@use "../../../style.scss" as devices;
+@import "../../../style.scss";
+
 .product-card-container {
   width: 100%;
   display: flex;
@@ -5,6 +8,20 @@
   height: 350px;
   align-items: center;
   position: relative;
+
+  @include devices(tablet) {
+  }
+
+  @include devices(mobile) {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    height: 350px;
+    align-items: center;
+    position: relative;
+    max-width: 100%;
+    margin-bottom: 0.83em;
+  }
 
   img {
     width: 100%;

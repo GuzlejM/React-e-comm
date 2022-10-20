@@ -1,2 +1,1 @@
-
-                         
+React e-comm project
